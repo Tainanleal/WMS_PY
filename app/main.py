@@ -5,25 +5,29 @@ import os
 # Load environment variables from .env file
 load_dotenv()
 
-from app.api.endpoints import auth, products, inbound, outbound, users, branches # Import the new branches router
+# Import all routers
+from app.api.endpoints import (
+    auth, products, inbound, outbound, users, branches, quality
+)
 
 app = FastAPI(
     title="WMS Enterprise API",
-    description="Warehouse Management System (WMS) de nível enterprise.",
-    version="0.1.0",
+    description="Warehouse Management System (WMS) for quality control and stock management.",
+    version="0.2.0",
 )
 
-# Include routers
+# Include routers with appropriate prefixes and tags
 app.include_router(auth.router, prefix="/auth", tags=["Authentication"])
-app.include_router(users.router, prefix="/api", tags=["Users"]) 
-app.include_router(branches.router, prefix="/api", tags=["Branches"]) # Add the new branches router
+app.include_router(users.router, prefix="/api", tags=["Users"])
+app.include_router(branches.router, prefix="/api", tags=["Branches"])
+app.include_router(quality.router, prefix="/api", tags=["Quality Control"])
 app.include_router(products.router, prefix="/wms", tags=["Products"])
-app.include_router(inbound.router, prefix="/wms", tags=["Inbound"])
-app.include_router(outbound.router, prefix="/wms", tags=["Outbound"])
+app.include_router(inbound.router, prefix="/wms", tags=["Inbound Operations"])
+app.include_router(outbound.router, prefix="/wms", tags=["Outbound Operations"])
 
-@app.get("/", tags=["Root"], summary="Verifica se a API está online")
+@app.get("/", tags=["Root"], summary="Check if the API is online")
 def read_root():
     """
-    Endpoint raiz para verificar o status da API.
+    Root endpoint to check the API status.
     """
-    return {"status": "online", "message": "Bem-vindo à WMS Enterprise API!"}
+    return {"status": "online", "message": "Welcome to the WMS Enterprise API!"}
