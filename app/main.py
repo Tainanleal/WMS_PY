@@ -7,7 +7,7 @@ load_dotenv()
 
 # Import all routers
 from app.api.endpoints import (
-    auth, products, inbound, outbound, users, branches, quality
+    auth, products, inbound, outbound, users, branches, quality, vendors
 )
 
 app = FastAPI(
@@ -22,6 +22,7 @@ app.include_router(users.router, prefix="/api", tags=["Users"])
 app.include_router(branches.router, prefix="/api", tags=["Branches"])
 app.include_router(quality.router, prefix="/api", tags=["Quality Control"])
 app.include_router(products.router, prefix="/api/products", tags=["Products"])
+app.include_router(vendors.router, prefix="/api/vendors", tags=["Vendors"])
 app.include_router(inbound.router, prefix="/wms", tags=["Inbound Operations"])
 app.include_router(outbound.router, prefix="/wms", tags=["Outbound Operations"])
 
