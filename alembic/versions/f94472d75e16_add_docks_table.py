@@ -1,7 +1,7 @@
 """Add docks table
 
 Revision ID: f94472d75e16
-Revises: 08a913e8f102
+Revises: 
 Create Date: 2026-02-09 12:05:25.000878
 
 """
@@ -13,7 +13,7 @@ import sqlalchemy as sa
 
 # revision identifiers, used by Alembic.
 revision: str = 'f94472d75e16'
-down_revision: Union[str, Sequence[str], None] = '08a913e8f102'
+down_revision: Union[str, Sequence[str], None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 

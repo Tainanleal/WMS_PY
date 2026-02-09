@@ -8,6 +8,23 @@ from .database import Base
 
 # --- Enums for Statuses and Roles ---
 
+class DockType(str, enum.Enum):
+    INBOUND = "inbound"
+    OUTBOUND = "outbound"
+
+class PurchaseOrderStatus(str, enum.Enum):
+    PENDING = "pending"
+    SENT = "sent"
+    PARTIALLY_RECEIVED = "partially_received"
+    FULLY_RECEIVED = "fully_received"
+    CANCELLED = "cancelled"
+
+class InboundShipmentStatus(str, enum.Enum):
+    EXPECTED = "expected"
+    ARRIVED = "arrived"
+    PARTIALLY_UNLOADED = "partially_unloaded"
+    FULLY_UNLOADED = "fully_unloaded"
+
 class UserProfile(str, enum.Enum):
     ADMIN = "admin"
     OPERATOR = "operator"

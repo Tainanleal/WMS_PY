@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from app.models.dock import DockType
+from app.core.models import DockType
 
 # Shared properties
 class DockBase(BaseModel):

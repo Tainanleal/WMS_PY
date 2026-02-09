@@ -1,20 +1,21 @@
 from sqlalchemy.orm import Session
-from app import models, schemas
+from app.models.vendor import Vendor
+from app.schemas.vendor import VendorCreate, VendorUpdate
 
 def get_vendor(db: Session, vendor_id: int):
-    return db.query(models.Vendor).filter(models.Vendor.id == vendor_id).first()
+    return db.query(Vendor).filter(Vendor.id == vendor_id).first()
 
 def get_vendors(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.Vendor).offset(skip).limit(limit).all()
+    return db.query(Vendor).offset(skip).limit(limit).all()
 
-def create_vendor(db: Session, vendor: schemas.VendorCreate):
-    db_vendor = models.Vendor(**vendor.dict())
+def create_vendor(db: Session, vendor: VendorCreate):
+    db_vendor = Vendor(**vendor.dict())
     db.add(db_vendor)
     db.commit()
     db.refresh(db_vendor)
     return db_vendor
 
-def update_vendor(db: Session, vendor_id: int, vendor: schemas.VendorUpdate):
+def update_vendor(db: Session, vendor_id: int, vendor: VendorUpdate):
     db_vendor = get_vendor(db, vendor_id)
     if db_vendor:
         update_data = vendor.dict(exclude_unset=True)

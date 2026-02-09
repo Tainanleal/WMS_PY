@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from typing import Optional, List
 from datetime import date, datetime
-from app.models.inbound_shipment import InboundShipmentStatus
+from app.core.models import InboundShipmentStatus
 from .inbound_shipment_item import InboundShipmentItem
 
 # --- Base Schema ---

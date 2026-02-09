@@ -1,20 +1,21 @@
 from sqlalchemy.orm import Session
-from app import models, schemas
+from app.models.purchase_order import PurchaseOrder
+from app.schemas.purchase_order import PurchaseOrderCreate, PurchaseOrderUpdate
 
 def get_purchase_order(db: Session, purchase_order_id: int):
-    return db.query(models.PurchaseOrder).filter(models.PurchaseOrder.id == purchase_order_id).first()
+    return db.query(PurchaseOrder).filter(PurchaseOrder.id == purchase_order_id).first()
 
 def get_purchase_orders(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.PurchaseOrder).offset(skip).limit(limit).all()
+    return db.query(PurchaseOrder).offset(skip).limit(limit).all()
 
-def create_purchase_order(db: Session, purchase_order: schemas.PurchaseOrderCreate):
-    db_purchase_order = models.PurchaseOrder(**purchase_order.dict())
+def create_purchase_order(db: Session, purchase_order: PurchaseOrderCreate):
+    db_purchase_order = PurchaseOrder(**purchase_order.dict())
     db.add(db_purchase_order)
     db.commit()
     db.refresh(db_purchase_order)
     return db_purchase_order
 
-def update_purchase_order(db: Session, purchase_order_id: int, purchase_order: schemas.PurchaseOrderUpdate):
+def update_purchase_order(db: Session, purchase_order_id: int, purchase_order: PurchaseOrderUpdate):
     db_purchase_order = get_purchase_order(db, purchase_order_id)
     if db_purchase_order:
         update_data = purchase_order.dict(exclude_unset=True)

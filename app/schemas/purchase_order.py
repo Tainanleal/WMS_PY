@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from typing import Optional, List
 from datetime import date, datetime
-from app.models.purchase_order import PurchaseOrderStatus
+from app.core.models import PurchaseOrderStatus
 from .purchase_order_item import PurchaseOrderItem
 
 # --- Base Schema ---
