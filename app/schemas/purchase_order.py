@@ -1,7 +1,8 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
 from datetime import date, datetime
 from app.models.purchase_order import PurchaseOrderStatus
+from .purchase_order_item import PurchaseOrderItem
 
 # --- Base Schema ---
 class PurchaseOrderBase(BaseModel):
@@ -24,6 +25,7 @@ class PurchaseOrder(PurchaseOrderBase):
     id: int
     created_at: datetime
     updated_at: Optional[datetime] = None
+    items: List[PurchaseOrderItem] = []
 
     class Config:
         from_attributes = True

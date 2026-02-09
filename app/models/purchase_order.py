@@ -21,3 +21,4 @@ class PurchaseOrder(Base):
     updated_at = Column(DateTime, onupdate=func.now())
 
     vendor = relationship("Vendor")
+    items = relationship("PurchaseOrderItem", back_populates="purchase_order")
