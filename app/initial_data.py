@@ -22,12 +22,12 @@ def init_db():
         else:
             print(f"Default branch '{default_branch_name}' already exists.")
 
-        # --- Create Master Admin User ---
-        master_user_email = "taynanleal359@gmail.com"
+        # --- Create Master Admin User (for E2E testing) ---
+        master_user_email = "admin@example.com"
         db_user = db.query(models.User).filter(models.User.email == master_user_email).first()
 
         if not db_user:
-            hashed_password = get_password_hash("123456")
+            hashed_password = get_password_hash("admin123")
             db_user = models.User(
                 email=master_user_email,
                 hashed_password=hashed_password,
