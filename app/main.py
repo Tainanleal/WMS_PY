@@ -21,7 +21,7 @@ app.include_router(auth.router, prefix="/auth", tags=["Authentication"])
 app.include_router(users.router, prefix="/api", tags=["Users"])
 app.include_router(branches.router, prefix="/api", tags=["Branches"])
 app.include_router(quality.router, prefix="/api", tags=["Quality Control"])
-app.include_router(products.router, prefix="/wms", tags=["Products"])
+app.include_router(products.router, prefix="/api/products", tags=["Products"])
 app.include_router(inbound.router, prefix="/wms", tags=["Inbound Operations"])
 app.include_router(outbound.router, prefix="/wms", tags=["Outbound Operations"])
 
